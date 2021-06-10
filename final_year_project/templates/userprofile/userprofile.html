@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contentxyz %}
+<script>
+                                function myFunction(){
+                                    var selectobject = document.getElementById("crops");
+                                    for (var i=0; i<selectobject.length; i++) {
+                                           // selectobject.remove();
+                                    }
+                                    var select="<select name=\"cropselected\" id=\"crops\">"
+                                    var xhttp = new XMLHttpRequest();
+                                    xhttp.onreadystatechange=function() {
+                                      if (this.readyState == 4 && this.status == 200) {
+                                        document.getElementById("insert").innerHTML = this.responseText;
+                                        //select=select+this.response;
+                                      }
+                                    };
+                                    land=document.getElementById('selected').value;
+                                    xhttp.open("GET", 'http://raj4ever.pythonanywhere.com/detail/cropsinland/'+land.split(" ")[0], true);
+                                    xhttp.send();
+                                    select=select+"</select>"
+                                   //document.getElementById("insert").innerHTML=select;
+                                }
+                            </script>
+		<div class="blog">
+			<div class="container">
+				<div class="blog-main">
+					<div class="col-md-8 blog-main-left">
+						<h3>Profile</h3>
+						<div class="blg">
+							<div class="col-md-4 blog-left blog-single-left">
+								<img src="{{ img.img.url }}" alt="" style="height: 300px;">
+                                <form action="{% url 'profilepic' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <input type="submit">
+                                </form>
+							</div>
+							<div class="col-md-8 blog-single-left">
+								<p class="para1"><span>UserName: </span>{{ data.username|title }}</p>
+								<p class="para1"><span>First Name: </span>{{ data.first_name|title }}</p>
+								<p class="para1"><span>Last Name: </span>{{ data.last_name|title }}</p>
+								<p class="para1"><span>Email: </span>{{ data.email }}</p>
+                                <form action="{% url 'passreset' %}" method="post">
+                                   {% csrf_token %}
+                                    <p class="para1"><span>Current Password: </span><input type="password" name="cpassword" required></p>
+                                    <p class="para1"><span>New Password: </span><input type="password" name="npassword" required style="
+    margin-left: 23px;
+"></p>
+                                    <p class="para1"><span>Re-New Password: </span><input type="password" name="rnpassword" required></p>
+                                    <p class="para1"><input type="submit"></p>
+                                </form>
+							</div>
+							<div class="clearfix"> </div>
+							<form method="post" action="{% url 'landcropdetail' %}">
+							    {% csrf_token %}
+                                <p class="para3"><span>Choose a Land/Soil type: </span><select name="landtype"  onchange="myFunction()" id="selected">
+                                    {% for i in lands %}
+                                        {% if i.name|title != landselected.land_type|title %}
+                                            <option value="{{ i.name }}">{{ i.name|title }}</option>
+                                        {% else %}
+                                            <option value="{{ i.name }}" selected>{{ i.name|title }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select></p>
+                                <p class="para3"><span>Area of the Land: </span><input value="{{ landselected.land_area }}
+"placeholder="Enter area in meter square" name="areaofland" required><span> m<sup>2</sup></span> </p>
+                                <p class="para3"><span>Crop Recommended: </span>{{ precrop|title }}</p>
+                                <p class="para3"><span>Choose a Crop: </span><span id="insert"><select name="cropselected" id="crops">
+                                   <span id='demo'>
+                                    {% for i in crops %}
+                                        {% if i.name|title != landselected.cropselected|title %}
+                                            <option value="{{ i.name }}">{{ i.name|title }}</option>
+                                        {% else %}
+                                            <option value="{{ i.name }}" selected>{{ i.name|title }}</option>
+                                        {% endif %}
+                                    {% endfor %}</span>
+                                </select></span>
+
+
+                                <p class="para3"><input type="submit"></p>
+
+
+                            </form>
+                            {% if hardwaredata %}
+                                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                    <table class="table table-sm  table-hover">
+                                        <thead class="thead-dark">
+                                            <tr><th>Moisture</th>
+                                            <th>Temperature</th>
+                                            <th>pH</th></tr>
+                                        </thead>
+                                        <tbody>
+                                {% for i in hardwaredata %}
+                                    <tr>
+                                        <td>{{ i.moisture }}</td>
+                                        <td>{{ i.temp }}</td>
+                                        <td>{{ i.ph }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody></table></div>
+                            {% endif %}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+{% endblock %}

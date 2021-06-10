@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user %}
+{% block title %}
+Detail
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/detail/detail.css' %}?{% now "U" %}">
+{% endblock %}
+{% block body_content %}
+    <div class="content">
+        <div class="content_left">
+            <button  class="crop" >Land <i class="fa fa-caret-down"></i></button>
+                <div class="asasas" style="display: none">
+
+                    {% for key, value in details.items %}
+                    {% if value|length > 1 %}
+                        <button  class="crop" onclick="loadDoc('land/'+{{ value.0 }})" style="margin-left: 15px">{{ key|title }} <i class="fa fa-caret-down" style="margin-left: 0px;"></i></button>
+
+                        <div  id="crops" class="content_left_crop " style="display: none;margin-left: 20px">
+                            {% for i in value|remove0 %}
+                                <button onclick="loadDoc('crop/'+{{ i.pk }})" style="margin-left: 15px;color: #333333">{{ i.name.title }}</button>
+
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+        </div>
+        <div class="content_right">
+            <p id="demo"></p>
+        </div>
+    </div>
+    <script src="{% static 'js/detail/detail.js' %}"></script>
+{% endblock %}

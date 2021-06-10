@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contacts{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/contact/contacts.css' %}?{% now "U" %}">
+{% endblock %}
+{% block body_content %}
+<div class="content_body">
+    {% for i in con %}
+    {% if i.category == "Teacher" %}
+    <div class="teacher card">
+        <div class="personimg">
+            <img src="{{ i.img.url }}" height="155" width="155">
+        </div>
+        <br>
+        <div class="details card-body">
+            Name: {{ i.name|title }}<br>
+            Mobile: {{ i.mobile_no }}<br>
+            Email: <a href="mailto: {{ i.email }}?subject=Mail from Our Site">{{ i.email }}</a><br>
+            Address: {{ i.address|title }}<br>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% for i in con %}
+    {% if i.category == "Student" %}
+    <div class="student card">
+        <div class="personimg">
+            <img src="{{ i.img.url }}" height="155" width="155">
+        </div>
+        <br>
+        <div class="details card-body">
+            Name: {{ i.name|title }}<br>
+            Mobile: {{ i.mobile_no }}<br>
+            Email: <a href="mailto: {{ i.email }}?subject=Mail from Our Site">{{ i.email }}</a><br>
+            Address: {{ i.address|title }}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="feedbackform">
+    <form method="post" action="feedback">
+        {% csrf_token %}
+        <h3>Send us your feedback:</h3>
+        <textarea name="feedback" rows="4" cols="50"></textarea>
+        <br>
+        <center><input type="submit"></center>
+    </form>
+</div>
+{% endblock %}

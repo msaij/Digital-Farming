@@ -1,0 +1,45 @@
+html,body{
+    height: auto;
+}
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.mainbody{
+    display: grid;
+    grid-template-rows: auto auto;
+}
+.mainbody_header{
+    font-family:initial;
+}
+.mainbody_header h3{
+    text-align: center;
+    color: greenyellow;
+    width: 30%;
+}
+.mainbody_header ul{
+    position: inherit;
+    float: right;
+}
+.mainbody_header ul li{
+    display: inline-block;
+    padding: 7px;
+}
+
+.mainbody_header ul li a{
+    text-decoration: none;
+    color: black;
+    font-size:15px;
+}
+.mainbody_header ul li:hover{
+    border-bottom:solid black 1px;
+}
+.mainbody_header{
+    background-color: white;
+}
+#paragraph{
+    max-width: 700px;
+    text-align: justify;
+    margin-left: 400px;
+    margin-top:50px
+}

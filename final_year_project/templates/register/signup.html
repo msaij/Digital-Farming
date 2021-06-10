@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Signup{%  endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/register/signup.css' %}?{% now "U" %}">
+{% endblock %}
+{% block body_content %}
+    <div class="container">
+    <form action='signup' method="post">
+        {% csrf_token %}
+        {% if messages %}
+        <p style="color: red;height: 1px">{% for i in messages %}{{ i }}{% endfor %}</p><br>
+        {% endif %}
+        <label for="username">Username</label><br>
+        <input type="text" name="username" required class="username"><br>
+        <label for="firstname">First Name</label><br>
+        <input type="text" name="firstname" required class="firstname"><br>
+        <label for="lastname">Last Name</label><br>
+        <input type="text" name="lastname" required class="lastname"><br>
+        <label for="email">Email</label><br>
+        <input type="email" name="email" required class="email"><br>
+        <label for="password">Password</label><br>
+        <input type="password" name="password" required class="password"><br>
+        <input type="submit"  class="btn btn-primary btn-sm"><br>
+    </form>
+    </div>
+{% endblock %}

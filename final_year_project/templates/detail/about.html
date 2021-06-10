@@ -1,0 +1,52 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% extends 'base.html' %}
+{% load static %}
+    {% block title %}&#124; About{% endblock %}
+    {% block contentxyz %}
+		<div class="about">
+			<div class="container">
+				<div class="about-main">
+					<div class="col-md-8 about-left">
+						<h3>ABOUT US</h3>
+						{% for i in crops %}
+                            <div class="about-left-one">
+                                <div class="col-md-4 blog-left">
+                                    <img src="{{ i.img.url }}" alt="">
+                                </div>
+                                <div class="col-md-8 about-one-left">
+                                    <h4>{{ i.name|title }}</h4>
+                                    <p> {{ i.description }}</p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+						{% endfor %}
+
+					</div>
+					<div class="col-md-4 about-left">
+						<h3>Responsibilities</h3>
+						<ul>
+							<li>Increased productivity</li>
+							<li>Enhanced farmer livelihood </li>
+							<li>Better market linkage</li>
+							<li>Informed decision-making</li>
+							<li>Efficient policy-making and implementation</li>
+						</ul>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+		<!--End-about-->
+		<div class="choose">
+			<div class="container">
+				INCREASE EFFICIENCY.SCALE PRODUCTIVITY.STRENGTHEN SUSTAINABILITY.
+The world population is expected to cross the 10 billion mark by the middle of the century and its combined impact with urbanization and the rise of middle class is bound to create a higher demand of healthy, fairly produced, and sustainable food which would require the current produce to double by that time. In meeting this goal, smart agtech solutions would prove instrumental by optimizing agricultural practices, minimizing waste, developing climate resilience, and providing timely agricultural advisory.After observing the agrarian crisis looming large on the rural areas of Karnataka in 2010 where local farmers were facing a gamut of problems ranging from non-availability of finance, climatic vagaries, soil degradation, pest infestation and diseases, operational inefficiencies, and no predictability of yield. Taking a resolution on doing this bit to prevent farmers’ suicides and avert the agrarian crisis, We have built and set up digital agriculture- an agriculture technology solutions applicaton that would address several pain points of millions of farmers across the country.
+			</div>
+		</div>
+
+    {% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}&#124; {{ cropselected.name|title }}{% endblock %}
+{% block contentxyz %}
+		<div class="blog">
+			<div class="container">
+				<div class="blog-main">
+					<div class="col-md-8 blog-main-left">
+						<h3>BLOG</h3>
+						<div class="blg">
+							<div class="col-md-4 blog-left blog-single-left">
+								<img src="{{ cropselected.img.url }}" alt="">
+							</div>
+							<div class="col-md-8 blog-single-left">
+								<h5>{{ cropselected.name|title }}</h5>
+								<p class="para1"><span>Climatic Condition: </span>{{ cropselected.climatic_condition|title }}</p>
+								<p class="para1"><span>Moisture: </span>{{ cropselected.moisture|title }}</p>
+								<p class="para1"><span>Water Quantity: </span>{{ cropselected.water_quantity|title }} mm</p>
+								<p class="para1"><span>Pesticides: </span>{{ cropselected.pesticides|title }}</p>
+							</div>
+							<div class="clearfix"> </div>
+							<p class="para3"><span>pH level: </span>{{ cropselected.ph_level|title }}</p>
+							<p class="para3"><span>Min temp: </span>{{ cropselected.min_temp|title }} &#8451</p>
+							<p class="para3"><span>Max temp: </span>{{ cropselected.max_temp|title }} &#8451</p>
+							<p class="para4"><span>Description: </span>{{ cropselected.description }}</p>
+
+						</div>
+					</div>
+					<div class="col-md-4 blog-main-left">
+						<h3>CATEGORIES</h3>
+						{% for i in lands %}
+                            <div class="ctgry">
+                            <ul>
+                                <li><a href="detail/land/{{ i.pk }}">{{ i.name }}</a></li>
+                            </ul>
+                            </div>
+                        {% endfor %}
+						</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

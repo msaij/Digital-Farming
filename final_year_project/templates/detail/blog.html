@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}&#124; Crops{% endblock %}
+{% block contentxyz %}
+		<div class="blog">
+			<div class="container">
+				<div class="blog-main">
+					<div class="col-md-8 blog-main-left">
+						<h3>Crops</h3>
+                        {% for i in crops %}
+						<div class="blg">
+							<div class="col-md-4 blog-left">
+								<a href="detail/crop/{{ i.pk }}"><img src="{{ i.img.url }}" alt=""></a>
+							</div>
+							<div class="col-md-8 blog-left">
+								<h5>{{ i.name.title }}</h5>
+								<p>{{ i.description }}</p>
+								<div class="blog-btn">
+									<a href="detail/crop/{{ i.pk }}">Read More</a>
+								</div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+                        {% endfor %}
+					</div>
+					<div class="col-md-4 blog-main-left">
+						<h3>CATEGORIES</h3>
+						{% for i in lands %}
+                            <div class="ctgry">
+                            <ul>
+                                <li><a href="detail/land/{{ i.pk }}">{{ i.name }}</a></li>
+                            </ul>
+                            </div>
+                        {% endfor %}
+                        <div class="archives">
+
+							<img src="{{ landselected.img.url }}" alt=""><br>
+						    <h3><u>{{ landselected.name }}</u></h3>
+                    </div>
+					</div>
+
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
