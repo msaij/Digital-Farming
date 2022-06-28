@@ -1,0 +1,6 @@
+Dockerfile
+sai
+docker-compose.yml
+docker-compose.yaml
+.git*
+.docker*
